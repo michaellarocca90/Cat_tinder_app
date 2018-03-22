@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Login.css';
 import AuthService from '../services/AuthService';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 
 class Login extends Component {
@@ -56,6 +57,12 @@ class Login extends Component {
               type="submit"
             />
           </form>
+            <Link
+              to={`/Registration`}
+              activeClassName='active'
+            >
+                <small className='subtitle'>Not Registered?</small>
+            </Link>
         </div>
       </div>
     );

@@ -18,6 +18,9 @@ import {
 import Cats from './pages/Cats'
 import withAuth from './pages/withAuth'
 import NewCat from './pages/NewCat'
+import AuthService from './services/AuthService';
+
+const Auth = new AuthService()
 
 class App extends Component {
   constructor(props){
@@ -30,7 +33,12 @@ class App extends Component {
     }
   }
 
-componentWillMount(){
+  handleLogout(){
+    Auth.logout()
+    this.props.history.replace('/login')
+  }
+
+  componentWillMount(){
   fetch(`${this.state.apiURL}/cats`)
   .then((rawResponse) => {
     return rawResponse.json()
@@ -41,6 +49,8 @@ componentWillMount(){
 }
 
 newCatSubmit(cat){
+  debugger
+  console.log(JSON.stringify(cat))
   fetch(`${this.state.apiURL}/cats`,
     {
       body: JSON.stringify(cat),
@@ -98,7 +108,9 @@ newCatSubmit(cat){
               {this.state.newCatSuccess &&
                 <Redirect to="/cats" />
               }
-
+              <p className="App-intro">
+                <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
+              </p>
             </Grid>
           )} />
           <Route exact path="/cats" render={props => (
@@ -126,6 +138,9 @@ newCatSubmit(cat){
               {!this.state.newCatSuccess &&
                 <Redirect to="/" />
               }
+              <p className="App-intro">
+                <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
+              </p>
             </Grid>
           )} />
         </div>
