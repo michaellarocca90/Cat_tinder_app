@@ -134,6 +134,7 @@ class NewCat extends Component {
 
         <Row>
           <Col xs={6}>
+          //change this button 
             <Button
               id="submit"
               onClick={this.handleSubmit.bind(this)}

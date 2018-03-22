@@ -4,7 +4,10 @@ import './index.css';
 import App from './App';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './pages/Login';
+import Registration from './pages/Registration'
 import registerServiceWorker from './registerServiceWorker';
+
+//master router, on / render App,
 
 ReactDOM.render(
   <Router>
@@ -13,6 +16,11 @@ ReactDOM.render(
         exact
         path='/'
         component={App}
+      />
+      <Route
+        exact
+        path='/Registration'
+        component={Registration}
       />
       <Route
         exact
