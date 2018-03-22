@@ -9,16 +9,19 @@ import {
   Alert,
   HelpBlock
 } from 'react-bootstrap'
+import AuthService from '../services/AuthService';
 
 class NewCat extends Component {
   constructor(props){
     super(props)
+    this.Auth = new AuthService()
     this.state = {
       form:{
         name: '',
         age: '',
         enjoys: '',
-        city: ''
+        city: '',
+        user_id: ''
       }
     }
   }
@@ -26,6 +29,7 @@ class NewCat extends Component {
   handleChange(event){
     const formState = Object.assign({},this.state.form)
     formState[event.target.name] = event.target.value
+    formState.user_id = this.Auth.getUserId()
     this.setState({form: formState})
   }
 
@@ -134,7 +138,7 @@ class NewCat extends Component {
 
         <Row>
           <Col xs={6}>
-          //change this button 
+          //change this button
             <Button
               id="submit"
               onClick={this.handleSubmit.bind(this)}
