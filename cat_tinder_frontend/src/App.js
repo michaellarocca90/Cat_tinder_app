@@ -49,8 +49,6 @@ class App extends Component {
 }
 
 newCatSubmit(cat){
-  debugger
-  console.log(JSON.stringify(cat))
   fetch(`${this.state.apiURL}/cats`,
     {
       body: JSON.stringify(cat),

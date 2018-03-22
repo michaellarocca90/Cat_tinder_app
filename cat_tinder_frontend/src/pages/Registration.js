@@ -16,7 +16,8 @@ class Registration extends Component {
       },
       apiURL: "http://localhost:3000",
       newCatSuccess: false,
-      errors: null
+      errors: null,
+      id: ''
     }
   }
 
