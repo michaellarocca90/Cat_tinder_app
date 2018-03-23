@@ -10,13 +10,15 @@ cat_attributes = [
     name: 'Felix',
     age: 2,
     city: 'Long Beach',
-    enjoys: 'Long naps on the couch, and a warm fire.'
+    enjoys: 'Long naps on the couch, and a warm fire.',
+    user_id: 2
   },
   {
     name: 'Homer',
     age: 12,
     city: 'Atlanta',
-    enjoys: 'Food mostly, really just food.'
+    enjoys: 'Food mostly, really just food.',
+    user_id: 1
   }
 ]
 

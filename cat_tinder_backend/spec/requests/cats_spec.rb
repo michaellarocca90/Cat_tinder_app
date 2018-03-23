@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 describe "Cats API" do
-  it "gets a list of Cats" do
+  let(:encoded_file) do
+    file_path = File.join(Rails.root, 'spec', 'fixtures', 'sample-image.png')
+    base64_image = Base64.encode64(File.read(file_path))
+    "data:image/png;base64,#{base64_image}"
+  end
 
-    Cat.create(name: 'Felix', age: 2, city: 'West Side', enjoys: "That city life.")
+  it "gets a list of Cats" do
+    User.create(name:'Bob', email: 'bob@bob.com', password: 'secret')
+    Cat.create(name: 'Felix', age: 2, city: 'West Side', enjoys: "That city life.", user_id: 1, avatar_base: encoded_file)
 
     get '/cats'
 
@@ -21,7 +27,9 @@ describe "Cats API" do
         name: 'Buster',
         age: 4,
         city: 'San Diego',
-        enjoys: 'fancy feast and palm trees'
+        enjoys: 'fancy feast and palm trees',
+        avatar_base: encoded_file,
+        user_id: 1
       }
     }
 
@@ -32,6 +40,8 @@ describe "Cats API" do
     new_cat = Cat.first
 
     expect(new_cat.name).to eq('Buster')
+    expect(new_cat.avatar.url).to_not be nil
+
   end
 
   it "doesn't create a cat without a name, age, and city" do
