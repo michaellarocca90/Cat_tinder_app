@@ -25,6 +25,10 @@ class Cats extends Component {
                       <div><small className='cat-city'>City: {cat.city}</small></div>
                     </h4>
                   }>
+                  <img
+                    src={cat.avatar}
+                    height={100}
+                  />
                   <span className='cat-enjoys'>
                     {cat.enjoys}
                   </span>

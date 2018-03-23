@@ -18,8 +18,6 @@ export default function withAuth(WrappedComponent) {
       else {
         try {
           const userId = Auth.getUserId()
-          debugger
-          console.log(userId)
           this.setState({
             userId: userId
           })

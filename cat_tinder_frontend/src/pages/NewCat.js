@@ -21,7 +21,8 @@ class NewCat extends Component {
         age: '',
         enjoys: '',
         city: '',
-        user_id: ''
+        user_id: '',
+        avatar_base: null
       }
     }
   }
@@ -35,6 +36,24 @@ class NewCat extends Component {
 
   handleSubmit(){
     this.props.onSubmit(this.state.form)
+  }
+
+  getBase64(file){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = error => reject(error)
+    })
+  }
+
+  fileChangeHandler(event){
+    const file = event.target.files[0]
+    this.getBase64(file).then( (fileString) => {
+        const { form } = this.state
+        form.avatar_base = fileString
+        this.setState({form: form})
+    })
   }
 
   errorsFor(attribute){
@@ -132,6 +151,18 @@ class NewCat extends Component {
               {this.errorsFor('city') &&
                 <HelpBlock id="city-help-block">{this.errorsFor('city')}</HelpBlock>
               }
+            </FormGroup>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col xs={6}>
+            <FormGroup>
+              <ControlLabel id="avatar">Image</ControlLabel>
+              <input
+                type="file"
+                onChange={this.fileChangeHandler.bind(this)}
+              />
             </FormGroup>
           </Col>
         </Row>
