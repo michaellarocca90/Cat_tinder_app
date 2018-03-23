@@ -51,7 +51,7 @@ class App extends Component {
 newCatSubmit(cat){
   fetch(`${this.state.apiURL}/cats`,
     {
-      body: JSON.stringify(cat),
+      body: JSON.stringify({cat: cat}),
       headers: {
         'Content-Type': 'application/json'
       },
@@ -59,7 +59,7 @@ newCatSubmit(cat){
     }
   )
   .then((rawResponse)=>{
-    console.log(rawResponse)
+
     return Promise.all([rawResponse.status, rawResponse.json()])
   })
   .then((parsedResponse) =>{
