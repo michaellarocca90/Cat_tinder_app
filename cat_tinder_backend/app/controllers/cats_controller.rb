@@ -1,18 +1,17 @@
 class CatsController < ApplicationController
-
   def index
     @cats = Cat.all
 
-    # render json: cats
+    # render json: @cats
   end
 
   def create
-    cat = Cat.create(cat_params)
+    @cat = Cat.create(cat_params)
 
-    if cat.valid?
-      render json: cat
+    if @cat.valid?
+      render json: @cat
     else
-      render json: cat.errors, status: :unprocessable_entity
+      render json: @cat.errors, status: :unprocessable_entity
     end
   end
 

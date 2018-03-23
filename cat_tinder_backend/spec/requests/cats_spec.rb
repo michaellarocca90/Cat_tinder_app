@@ -8,19 +8,37 @@ describe "Cats API" do
   end
 
   it "gets a list of Cats" do
-    User.create(name:'Bob', email: 'bob@bob.com', password: 'secret')
-    Cat.create(name: 'Felix', age: 2, city: 'West Side', enjoys: "That city life.", user_id: 1, avatar_base: encoded_file)
 
-    get '/cats'
+    User.create(
+      name:'Bob',
+      email: 'bob@bob.com',
+      password: 'secret'
+    )
 
+    cat = Cat.create!(
+      name: 'Felix',
+      age: 2,
+      city: 'West Side',
+      enjoys: "That city life.",
+      user_id: 1,
+      avatar_base: encoded_file
+    )
+
+    get '/cats.json'
     json = JSON.parse(response.body)
 
-    expect(response).to be_success
+    expect(json).to be_a(Array)
 
     expect(json.length).to eq 1
   end
 
   it "creates a cat" do
+
+    User.create(
+      name:'Bob',
+      email: 'bob@bob.com',
+      password: 'secret'
+    )
 
     cat_params = {
       cat: {
@@ -33,14 +51,12 @@ describe "Cats API" do
       }
     }
 
-    post '/cats', params: cat_params
+  post '/cats', params: cat_params
+  puts response.body
 
-    expect(response).to be_success
-
-    new_cat = Cat.first
-
-    expect(new_cat.name).to eq('Buster')
-    expect(new_cat.avatar.url).to_not be nil
+   new_cat = Cat.first
+   expect(new_cat.name).to eq('Buster')
+   expect(new_cat.avatar.url).to_not be nil
 
   end
 
