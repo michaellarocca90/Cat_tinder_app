@@ -39,6 +39,7 @@ class App extends Component {
   }
 
   componentWillMount(){
+    debugger
   fetch(`${this.state.apiURL}/cats`)
   .then((rawResponse) => {
     return rawResponse.json()
@@ -78,6 +79,7 @@ newCatSubmit(cat){
 }
 
   render() {
+    console.log(this.state.newCatSuccess)
     return (
       <Router>
         <div>
@@ -133,9 +135,7 @@ newCatSubmit(cat){
               </PageHeader>
               <Cats cats={this.state.cats} />
 
-              {!this.state.newCatSuccess &&
-                <Redirect to="/" />
-              }
+              
               <p className="App-intro">
                 <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
               </p>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../Cats.css';
 import {
   Col,
   ListGroup,
@@ -9,35 +10,27 @@ import {
 class Cats extends Component {
   render() {
     return (
-      <Row>
-        <Col xs={12}>
-          <ListGroup>
-            {this.props.cats.map((cat, index) =>{
-              return (
-                <ListGroupItem
-                  key={index}
-                  header={
-                    <h4>
-                      <span className='cat-name'>
-                        {cat.name}
-                      </span>
-                      - <small className='cat-age'>{cat.age} years old</small>
-                      <div><small className='cat-city'>City: {cat.city}</small></div>
-                    </h4>
-                  }>
-                  <img
-                    src={cat.avatar}
-                    height={100}
-                  />
-                  <span className='cat-enjoys'>
-                    {cat.enjoys}
-                  </span>
-                </ListGroupItem>
-              )
-            })}
-          </ListGroup>
-        </Col>
-      </Row>
+        <tbody>
+          {this.props.cats.map((cat, index) =>{
+            return (
+              <div classname= "center">
+                <div className= "card">
+                  <tr key={index}>
+                    <h2 className="cat-name">Name: {cat.name}</h2>
+                    <p className="cat-img">
+                      <img src={cat.avatar} height={150}/>
+                    </p>
+                    <ol className="cat-details">
+                      <li>Age: {cat.age}</li>
+                      <li>Enjoys: {cat.enjoys}</li>
+                      <li>City: {cat.city}</li>
+                    </ol>
+                  </tr>
+                </div>
+              </div>
+            )
+          })}
+        </tbody>
     );
   }
 }
